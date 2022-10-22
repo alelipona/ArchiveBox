@@ -14,9 +14,9 @@ services:
     archivebox:
         # build: .                              # for developers working on archivebox
         image: ${DOCKER_IMAGE:-archivebox/archivebox:master}
-        command: server --quick-init 0.0.0.0:8000
+        command: server --quick-init 0.0.0.0:8501
         ports:
-            - 8000:8000
+            - 8501:8501
         environment:
             - ALLOWED_HOSTS=*                   # add any config options you want as env vars
             - MEDIA_MAX_SIZE=750m
