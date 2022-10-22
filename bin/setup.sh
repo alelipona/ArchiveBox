@@ -32,9 +32,9 @@ if (which docker-compose > /dev/null && docker pull archivebox/archivebox:latest
     echo "[+] Starting ArchiveBox server using: docker-compose up -d..."
     docker-compose up -d
     sleep 7
-    open http://127.0.0.1:8000 || true
+    open http://127.0.0.1:8501 || true
     echo
-    echo "[√] Server started on http://0.0.0.0:8000 and data directory initialized in ~/archivebox/data. Usage:"
+    echo "[√] Server started on http://0.0.0.0:8501 and data directory initialized in ~/archivebox/data. Usage:"
     echo "    cd ~/archivebox"
     echo "    docker-compose ps"
     echo "    docker-compose down"
@@ -57,14 +57,14 @@ elif (which docker > /dev/null && docker pull archivebox/archivebox:latest); the
     echo "[+] Starting ArchiveBox server using: docker run -d archivebox/archivebox..."
     docker run -v "$PWD":/data -it -d -p 8000:8000 --name=archivebox archivebox/archivebox:latest
     sleep 7
-    open http://127.0.0.1:8000 || true
+    open http://127.0.0.1:8501 || true
     echo
-    echo "[√] Server started on http://0.0.0.0:8000 and data directory initialized in ~/archivebox. Usage:"
+    echo "[√] Server started on http://0.0.0.0:8501 and data directory initialized in ~/archivebox. Usage:"
     echo "    cd ~/archivebox"
     echo "    docker ps --filter name=archivebox"
     echo "    docker kill archivebox"
     echo "    docker pull archivebox/archivebox"
-    echo "    docker run -v $PWD:/data -d -p 8000:8000 --name=archivebox archivebox/archivebox"
+    echo "    docker run -v $PWD:/data -d -p 8501:8501 --name=archivebox archivebox/archivebox"
     echo "    docker run -v $PWD:/data -it archivebox/archivebox manage createsuperuser"
     echo "    docker run -v $PWD:/data -it archivebox/archivebox add 'https://example.com'"
     echo "    docker run -v $PWD:/data -it archivebox/archivebox list"
@@ -182,17 +182,17 @@ fi
 
 echo
 echo "[+] Starting ArchiveBox server using: nohup archivebox server &..."
-nohup python3 -m archivebox server 0.0.0.0:8000 > ./logs/server.log 2>&1 &
+nohup python3 -m archivebox server 0.0.0.0:8501 > ./logs/server.log 2>&1 &
 sleep 7
-which open > /dev/null && open http://127.0.0.1:8000 || true
+which open > /dev/null && open http://127.0.0.1:8501 || true
 
 echo
-echo "[√] Server started on http://0.0.0.0:8000 and data directory initialized in ~/archivebox. Usage:"
+echo "[√] Server started on http://0.0.0.0:8501 and data directory initialized in ~/archivebox. Usage:"
 echo "    cd ~/archivebox"
 echo "    ps aux | grep archivebox"
 echo "    pkill -f archivebox"
 echo "    pip3 install --upgrade archivebox"
-echo "    archivebox server --quick-init 0.0.0.0:8000"
+echo "    archivebox server --quick-init 0.0.0.0:8501"
 echo "    archivebox manage createsuperuser"
 echo "    archivebox add 'https://example.com'"
 echo "    archivebox list"
