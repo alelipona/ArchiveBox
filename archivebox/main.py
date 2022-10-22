@@ -443,7 +443,7 @@ def init(force: bool=False, quick: bool=False, setup: bool=False, out_dir: Path=
     if Snapshot.objects.count() < 25:     # hide the hints for experienced users
         print()
         print('    {lightred}Hint:{reset} To view your archive index, run:'.format(**ANSI))
-        print('        archivebox server  # then visit http://127.0.0.1:8000')
+        print('        archivebox server  # then visit http://127.0.0.1:8501')
         print()
         print('    To add new links, you can run:')
         print("        archivebox add < ~/some/path/to/list_of_links.txt")
