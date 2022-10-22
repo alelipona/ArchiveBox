@@ -361,7 +361,7 @@ def log_archiving_finished(num_links: int):
     if Snapshot.objects.count() < 50:
         print()
         print('    {lightred}Hint:{reset} To manage your archive in a Web UI, run:'.format(**ANSI))
-        print('        archivebox server 0.0.0.0:8000')
+        print('        archivebox server 0.0.0.0:8501')
 
 
 def log_link_archiving_started(link: "Link", link_dir: str, is_new: bool):
