@@ -13,7 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [ubuntu-20.04, macos-latest, windows-latest]
+        os: [ubuntu-18.04, macos-latest, windows-latest]
         python: [3.7]
 
     steps:
@@ -136,11 +136,11 @@ jobs:
           docker-compose run archivebox init
           docker-compose up -d
           sleep 5
-          curl --silent --location 'http://127.0.0.1:8000' | grep 'ArchiveBox'
-          curl --silent --location 'http://127.0.0.1:8000/static/admin/js/jquery.init.js' | grep 'window.django'
+          curl --silent --location 'http://127.0.0.1:8501' | grep 'ArchiveBox'
+          curl --silent --location 'http://127.0.0.1:8501/static/admin/js/jquery.init.js' | grep 'window.django'
 
       - name: Check added urls show up in index
         run: |
           docker-compose run archivebox add 'http://example.com/#test_docker' --index-only
-          curl --silent --location 'http://127.0.0.1:8000' | grep 'http://example.com/#test_docker'
+          curl --silent --location 'http://127.0.0.1:8501' | grep 'http://example.com/#test_docker'
           docker-compose down || true
