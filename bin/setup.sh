@@ -55,7 +55,7 @@ elif (which docker > /dev/null && docker pull archivebox/archivebox:latest); the
     docker run -v "$PWD":/data -it --rm archivebox/archivebox:latest init --setup
     echo
     echo "[+] Starting ArchiveBox server using: docker run -d archivebox/archivebox..."
-    docker run -v "$PWD":/data -it -d -p 8000:8000 --name=archivebox archivebox/archivebox:latest
+    docker run -v "$PWD":/data -it -d -p 8501:8501 --name=archivebox archivebox/archivebox:latest
     sleep 7
     open http://127.0.0.1:8501 || true
     echo
