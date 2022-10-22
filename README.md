@@ -68,7 +68,7 @@ archivebox schedule --every=day --depth=1 https://example.com/rss.xml  # or have
 ```
 **🔢 Example usage: viewing the archived content.**
 ```bash
-archivebox server 0.0.0.0:8000            # use the interactive web UI
+archivebox server 0.0.0.0:8501            # use the interactive web UI
 archivebox list 'https://example.com'     # use the CLI commands (--help for more)
 ls ./archive/*/index.json                 # or browse directly via the filesystem
 ```
@@ -124,7 +124,7 @@ curl -O 'https://raw.githubusercontent.com/ArchiveBox/ArchiveBox/master/docker-c
 <li>Run the initial setup and create an admin user.
 <pre lang="bash"><code style="white-space: pre-line">docker-compose run archivebox init --setup
 </code></pre></li>
-<li>Optional: Start the server then login to the Web UI <a href="http://127.0.0.1:8000">http://127.0.0.1:8000</a> ⇢ Admin.
+<li>Optional: Start the server then login to the Web UI <a href="http://127.0.0.1:8501">http://127.0.0.1:8501</a> ⇢ Admin.
 <pre lang="bash"><code style="white-space: pre-line">docker-compose up
 # completely optional, CLI can always be used without running a server
 # docker-compose run [-T] archivebox [subcommand] [--args]
@@ -145,8 +145,8 @@ See <a href="#%EF%B8%8F-cli-usage">below</a> for more usage examples using the C
 docker run -v $PWD:/data -it archivebox/archivebox init --setup
 </code></pre>
 </li>
-<li>Optional: Start the server then login to the Web UI <a href="http://127.0.0.1:8000">http://127.0.0.1:8000</a> ⇢ Admin.
-<pre lang="bash"><code style="white-space: pre-line">docker run -v $PWD:/data -p 8000:8000 archivebox/archivebox
+<li>Optional: Start the server then login to the Web UI <a href="http://127.0.0.1:8501">http://127.0.0.1:8501</a> ⇢ Admin.
+<pre lang="bash"><code style="white-space: pre-line">docker run -v $PWD:/data -p 8501:8501 archivebox/archivebox
 # completely optional, CLI can always be used without running a server
 # docker run -v $PWD:/data -it [subcommand] [--args]
 </code></pre>
@@ -203,8 +203,8 @@ sudo python3 -m pip install --upgrade --ignore-installed archivebox   # pip need
 archivebox init --setup           # if any problems, install with pip instead
 </code></pre>
 </li>
-<li>Optional: Start the server then login to the Web UI <a href="http://127.0.0.1:8000">http://127.0.0.1:8000</a> ⇢ Admin.
-<pre lang="bash"><code style="white-space: pre-line">archivebox server 0.0.0.0:8000
+<li>Optional: Start the server then login to the Web UI <a href="http://127.0.0.1:8501">http://127.0.0.1:8501</a> ⇢ Admin.
+<pre lang="bash"><code style="white-space: pre-line">archivebox server 0.0.0.0:8501
 # completely optional, CLI can always be used without running a server
 # archivebox [subcommand] [--args]
 </code></pre>
@@ -231,8 +231,8 @@ brew install archivebox
 archivebox init --setup         # if any problems, install with pip instead
 </code></pre>
 </li>
-<li>Optional: Start the server then login to the Web UI <a href="http://127.0.0.1:8000">http://127.0.0.1:8000</a> ⇢ Admin.
-<pre lang="bash"><code style="white-space: pre-line">archivebox server 0.0.0.0:8000
+<li>Optional: Start the server then login to the Web UI <a href="http://127.0.0.1:8501">http://127.0.0.1:8501</a> ⇢ Admin.
+<pre lang="bash"><code style="white-space: pre-line">archivebox server 0.0.0.0:8501
 # completely optional, CLI can always be used without running a server
 # archivebox [subcommand] [--args]
 </code></pre>
@@ -260,8 +260,8 @@ archivebox init --setup
 # install any missing extras like wget/git/ripgrep/etc. manually as needed
 </code></pre>
 </li>
-<li>Optional: Start the server then login to the Web UI <a href="http://127.0.0.1:8000">http://127.0.0.1:8000</a> ⇢ Admin.
-<pre lang="bash"><code style="white-space: pre-line">archivebox server 0.0.0.0:8000
+<li>Optional: Start the server then login to the Web UI <a href="http://127.0.0.1:8501">http://127.0.0.1:8501</a> ⇢ Admin.
+<pre lang="bash"><code style="white-space: pre-line">archivebox server 0.0.0.0:8501
 # completely optional, CLI can always be used without running a server
 # archivebox [subcommand] [--args]
 </code></pre>
@@ -374,7 +374,7 @@ archivebox help
 
 ```bash
 archivebox manage createsuperuser  # set an admin password
-archivebox server 0.0.0.0:8000     # open http://127.0.0.1:8000 to view it
+archivebox server 0.0.0.0:8501     # open http://127.0.0.1:8501 to view it
 
 # you can also configure whether or not login is required for most features
 archivebox config --set PUBLIC_INDEX=False
@@ -640,11 +640,11 @@ Be aware that malicious archived JS can access the contents of other pages in yo
 
 ```bash
 # visiting an archived page with malicious JS:
-https://127.0.0.1:8000/archive/1602401954/example.com/index.html
+https://127.0.0.1:8501/archive/1602401954/example.com/index.html
 
 # example.com/index.js can now make a request to read everything from:
-https://127.0.0.1:8000/index.html
-https://127.0.0.1:8000/archive/*
+https://127.0.0.1:8501/index.html
+https://127.0.0.1:8501/archive/*
 # then example.com/index.js can send it off to some evil server
 ```
 
@@ -907,10 +907,10 @@ docker build . -t archivebox
 docker run -it \
     -v $PWD/data:/data \
     archivebox init --setup
-docker run -it -p 8000:8000 \
+docker run -it -p 8501:8501 \
     -v $PWD/data:/data \
     -v $PWD/archivebox:/app/archivebox \
-    archivebox server 0.0.0.0:8000 --debug --reload
+    archivebox server 0.0.0.0:8501 --debug --reload
 
 # (remove the --reload flag and add the --nothreading flag when profiling with the django debug toolbar)
 ```
