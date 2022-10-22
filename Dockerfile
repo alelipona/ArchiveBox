@@ -5,7 +5,7 @@
 #     docker run -v "$PWD/data":/data archivebox init
 #     docker run -v "$PWD/data":/data archivebox add 'https://example.com'
 #     docker run -v "$PWD/data":/data -it archivebox manage createsuperuser
-#     docker run -v "$PWD/data":/data -p 8000:8000 archivebox server
+#     docker run -v "$PWD/data":/data -p 8501:8501 archivebox server
 # Multi-arch build:
 #     docker buildx create --use
 #     docker buildx build . --platform=linux/amd64,linux/arm64,linux/arm/v7 --push -t archivebox/archivebox:latest -t archivebox/archivebox:dev
@@ -124,11 +124,11 @@ RUN /app/bin/docker_entrypoint.sh archivebox version
 
 # Open up the interfaces to the outside world
 VOLUME "$DATA_DIR"
-EXPOSE 8000
+EXPOSE 8501
 
 # Optional:
 # HEALTHCHECK --interval=30s --timeout=20s --retries=15 \
 #     CMD curl --silent 'http://localhost:8000/admin/login/' || exit 1
 
 ENTRYPOINT ["dumb-init", "--", "/app/bin/docker_entrypoint.sh"]
-CMD ["archivebox", "server", "--quick-init", "0.0.0.0:8000"]
+CMD ["archivebox", "server", "--quick-init", "0.0.0.0:8501"]
